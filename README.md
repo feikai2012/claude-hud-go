@@ -24,7 +24,7 @@ writes ANSI to stdout every ~300ms. In Go that collapses to **one static binary*
 See **[INSTALL.md](./INSTALL.md)**. TL;DR inside Claude Code:
 
 ```
-/plugin marketplace add jarrodwatts/claude-hud-go
+/plugin marketplace add feikai2012/claude-hud-go
 /plugin install claude-hud-go
 /claude-hud-go:setup
 ```
@@ -41,17 +41,17 @@ Claude Code ─stdin JSON─▶ parse ─▶ render lines ─stdout─▶ Claude
 
 Mirrors the TypeScript source module-for-module for verifiability:
 
-| Go package | Source | Responsibility |
-|------------|--------|----------------|
-| `cmd/claude-hud` | `src/index.ts` | Entry point / orchestration |
-| `internal/stdinp` | `src/stdin.ts` | Parse stdin; context %, usage, model name |
-| `internal/transcript` | `src/transcript.ts` | JSONL parse + mtime cache |
-| `internal/config` | `src/config.ts` | Schema, defaults, merge, validate |
-| `internal/configread` | `src/config-reader.ts` | Count CLAUDE.md/rules/MCP/hooks |
-| `internal/gitstat` | `src/git.ts` | Branch, dirty, ahead/behind, stats |
-| `internal/i18n` | `src/i18n/*` | en / zh-Hans / zh-Hant catalogs |
-| `internal/textwidth` | `src/render/width.ts` | ANSI + grapheme + CJK width, wrap/truncate |
-| `internal/render` | `src/render/*` | Lines, colors, layout, merge groups |
+| Go package | Responsibility |
+|------------|----------------|
+| `cmd/claude-hud` | Entry point / orchestration |
+| `internal/stdinp` | Parse stdin; context %, usage, model name |
+| `internal/transcript` | JSONL parse + mtime cache |
+| `internal/config` | Schema, defaults, merge, validate |
+| `internal/configread` | Count CLAUDE.md/rules/MCP/hooks |
+| `internal/gitstat` | Branch, dirty, ahead/behind, stats |
+| `internal/i18n` | en / zh-Hans / zh-Hant catalogs |
+| `internal/textwidth` | ANSI + grapheme + CJK width, wrap/truncate |
+| `internal/render` | Lines, colors, layout, merge groups |
 
 ## Build
 
