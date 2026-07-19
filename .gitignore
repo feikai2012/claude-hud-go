@@ -1,0 +1,6 @@
+# Local host-native build output. Release binaries in bin/ are committed
+# (they are what the plugin ships); ignore only the plain host build.
+/bin/claude-hud
+/bin/claude-hud.exe
+/hud.exe
+*.test

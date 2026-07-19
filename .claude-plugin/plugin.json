@@ -1,0 +1,17 @@
+{
+  "name": "claude-hud-go",
+  "description": "Real-time statusline HUD for Claude Code, single native Go binary - context health, tool activity, agent tracking, and todo progress",
+  "version": "0.1.0",
+  "author": {
+    "name": "Jarrod Watts (Go port)",
+    "url": "https://github.com/jarrodwatts"
+  },
+  "commands": [
+    "./commands/setup.md",
+    "./commands/configure.md"
+  ],
+  "homepage": "https://github.com/jarrodwatts/claude-hud-go",
+  "repository": "https://github.com/jarrodwatts/claude-hud-go",
+  "license": "MIT",
+  "keywords": ["hud", "monitoring", "statusline", "context", "tools", "agents", "todos", "claude-code", "golang"]
+}
