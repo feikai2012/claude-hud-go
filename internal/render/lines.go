@@ -178,6 +178,17 @@ func (c *Context) renderUsageLine(labelText string) string {
 	u := c.Usage
 	now := time.Now()
 
+	// Model-scoped weekly windows (e.g. Fable) rendered as extra segments.
+	scopedSuffix := ""
+	if d.ShowScopedUsage && len(u.ScopedWindows) > 0 {
+		barW := adaptiveBarWidth()
+		var segs []string
+		for _, w := range u.ScopedWindows {
+			segs = append(segs, c.usageWindowPart(w.Label, w.Percent, w.ResetAt, barW, true))
+		}
+		scopedSuffix = " | " + strings.Join(segs, " | ")
+	}
+
 	if u.IsLimitReached() {
 		var reset string
 		if u.FiveHour != nil && *u.FiveHour == 100 {
@@ -193,10 +204,13 @@ func (c *Context) renderUsageLine(labelText string) string {
 				suffix = fmt.Sprintf(" (%s)", reset)
 			}
 		}
-		return labelText + " " + colCritical("⚠ "+i18n.T("status.limitReached")+suffix, cl)
+		return labelText + " " + colCritical("⚠ "+i18n.T("status.limitReached")+suffix, cl) + scopedSuffix
 	}
 
 	if u.FiveHour == nil && u.SevenDay == nil {
+		if scopedSuffix != "" {
+			return labelText + " " + strings.TrimPrefix(scopedSuffix, " | ")
+		}
 		if u.BalanceLabel != "" {
 			return labelText + " " + u.BalanceLabel
 		}
@@ -204,15 +218,15 @@ func (c *Context) renderUsageLine(labelText string) string {
 	}
 	barW := adaptiveBarWidth()
 	if u.FiveHour == nil && u.SevenDay != nil {
-		return labelText + " " + c.usageWindowPart(i18n.T("label.weekly"), u.SevenDay, u.SevenDayResetAt, barW, true)
+		return labelText + " " + c.usageWindowPart(i18n.T("label.weekly"), u.SevenDay, u.SevenDayResetAt, barW, true) + scopedSuffix
 	}
 	fivePart := c.usageWindowPart("5h", u.FiveHour, u.FiveHourResetAt, barW, false)
 	sevenThreshold := d.SevenDayThreshold
 	if u.SevenDay != nil && float64(*u.SevenDay) >= sevenThreshold {
 		sevenPart := c.usageWindowPart(i18n.T("label.weekly"), u.SevenDay, u.SevenDayResetAt, barW, true)
-		return labelText + " " + fivePart + " | " + sevenPart
+		return labelText + " " + fivePart + " | " + sevenPart + scopedSuffix
 	}
-	return labelText + " " + fivePart
+	return labelText + " " + fivePart + scopedSuffix
 }
 
 func (c *Context) usageWindowPart(lbl string, percent *int, resetAt *time.Time, barW int, forceLabel bool) string {

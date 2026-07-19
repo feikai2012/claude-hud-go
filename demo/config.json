@@ -1,0 +1,23 @@
+{
+  "language": "zh",
+  "lineLayout": "expanded",
+  "pathLevels": 1,
+  "display": {
+    "showTools": true,
+    "showAgents": true,
+    "showTodos": true,
+    "showConfigCounts": true,
+    "showUsage": true,
+    "contextWarningThreshold": 70,
+    "contextCriticalThreshold": 85,
+    "sevenDayThreshold": 0,
+    "showScopedUsage": true,
+    "showSessionTokens": true
+  },
+  "colors": {
+    "context": "green",
+    "usage": "brightBlue",
+    "barFilled": "█",
+    "barEmpty": "░"
+  }
+}

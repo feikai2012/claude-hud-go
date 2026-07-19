@@ -41,7 +41,9 @@ next statusline refresh (no restart needed).
 | `display.mergeGroups` | `[["context","usage"]]` | Elements combined on one row |
 | `display.contextWarningThreshold` | `70` | Yellow at/above this % |
 | `display.contextCriticalThreshold` | `85` | Red + token breakdown at/above this % |
-| `display.sevenDayThreshold` | `80` | Only show weekly window at/above this % |
+| `display.sevenDayThreshold` | `80` | Only show weekly (all-model) window at/above this %; set `0` to always show |
+| `display.showScopedUsage` | `true` | Model-scoped weekly windows (e.g. Fable quota) on the usage line |
+| `display.showSessionTokens` | `false` | Cumulative session token totals line |
 | `language` | `en` | `en`, `zh` / `zh-Hans`, `zh-Hant` / `zh-TW` |
 
 Default `elementOrder`:

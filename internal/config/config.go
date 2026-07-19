@@ -46,6 +46,9 @@ type Display struct {
 	ShowUsage             bool     `json:"showUsage"`
 	UsageValue            string   `json:"usageValue"` // percent | remaining
 	UsageBarEnabled       bool     `json:"usageBarEnabled"`
+	// ShowScopedUsage renders model-scoped weekly windows (e.g. the Fable
+	// quota from rate_limits.model_scoped) on the usage line. Default true.
+	ShowScopedUsage       bool     `json:"showScopedUsage"`
 	ShowResetLabel        bool     `json:"showResetLabel"`
 	UsageCompact          bool     `json:"usageCompact"`
 	ShowTools             bool     `json:"showTools"`
@@ -161,7 +164,7 @@ func Default() HudConfig {
 			ShowModel: true, ShowProject: true, ShowAddedDirs: true,
 			AddedDirsLayout: "inline", ShowContextBar: true, ContextValue: "percent",
 			ShowTokenBreakdown: true, ShowUsage: true, UsageValue: "percent",
-			UsageBarEnabled: true, ShowResetLabel: true, ToolsMaxVisible: 4,
+			UsageBarEnabled: true, ShowScopedUsage: true, ShowResetLabel: true, ToolsMaxVisible: 4,
 			AuthUserLength: 8, PromptCacheTtlSeconds: 300,
 			MergeGroups:              [][]string{{"context", "usage"}},
 			AutocompactBuffer:        "enabled",
